@@ -41,7 +41,7 @@ Provide for original initialization of the "game" state via stdin. Prepare at le
 
 * The game must be written in C, have a structured style, and run from the terminal; 
   
-* Your source code will be tested by the static analyzer `cppcheck`, as well as the style linter `cpplint`. 
+* Your source code will be tested by the static analyzer `cppcheck`, as well as the style linter `clang-format`. 
   
 * Instructions on how to run these tests on your computer are in the `materials` folder. 
   
