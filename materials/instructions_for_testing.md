@@ -18,6 +18,10 @@ check your program and its source code for the following points:
   or if you have root rights (for Ubuntu / Linux Mint / Debian) \
   ```sudo apt install clang-format```
 
+  Required version of clang-format: \
+  **Mac** 14.0.5 \
+  **Linux** 13.0.1
+
 
  * **Static code analysis.** Sometimes (or not quite sometimes) it happens that
    a correctly compiled C program runs completely incorrectly or terminates
