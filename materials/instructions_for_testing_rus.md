@@ -33,3 +33,6 @@
    ```cppcheck --enable=all --suppress=missingIncludeSystem src/soursefile_name.c``` \
    Также можно проверить сразу все файлы с исходным кодом в директории: \
    ```cppcheck --enable=all --suppress=missingIncludeSystem src/```
+   Необходимая версия cppcheck: \
+   **Mac** 2.8 \
+   **Linux** 2.8

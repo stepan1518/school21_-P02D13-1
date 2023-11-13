@@ -37,3 +37,7 @@ check your program and its source code for the following points:
    ```cppcheck --enable=all --suppress=missingIncludeSystem src/soursefile_name.c``` \
    You can also check all the source code files in the directory at once: \
    ```cppcheck --enable=all --suppress=missingIncludeSystem src/```
+
+   Required version of cppcheck: \
+   **Mac** 2.8 \
+   **Linux** 2.8
