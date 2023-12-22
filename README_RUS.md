@@ -17,7 +17,7 @@
 ***LOADING Level 2… \
 LOADING Hall…***
 
-Совсем недавно Вы были в подобном холе. Или это было уже очень давно? Сложно сказать. Все перепуталось. Опять слышны голоса в дальнем углу холла. Значит Вы снова тут не одни. \
+Совсем недавно ты был в подобном холе. Или это было уже очень давно? Сложно сказать. Все перепуталось. Опять слышны голоса в дальнем углу холла. Значит, ты снова тут не один. \
 Сегодня холл залит ярким светом и тут идеальный порядок. Разнообразие — это хорошо. 
 
 Из колонок вдруг раздался четкий, кристально слышимый голос:
@@ -33,24 +33,24 @@ LOADING Hall…***
 * ***Графика*** 
 
 Поле — прямоугольник 80 на 25 клеток.
-Подразумевается, что поле "замкнуто само на себя", к примеру у нижнего правого квадратика соседом справа является нижний левый квадратик, а соседом снизу - верхний правый.
+Подразумевается, что поле «замкнуто само на себя», к примеру у нижнего правого квадратика соседом справа является нижний левый квадратик, а соседом снизу - верхний правый.
 
-Предусмотреть начальную инициализацию состояния "игры" через stdin. Подготовить как минимум 5 файлов с начальным состоянием для быстрого запуска и инициализации через перенаправление ввода.
+Предусмотреть начальную инициализацию состояния «игры» через stdin. Подготовить как минимум 5 файлов с начальным состоянием для быстрого запуска и инициализации через перенаправление ввода.
 
 ## Важные замечания
 
-* Игра должна быть разработана на языке Си, в структурном стиле и работать из терминала;
+* Игра должна быть разработана на языке Си, в структурном стиле и работать из терминала.
   
-* Ваш исходный код будет тестироваться статическим анализатором ```cppcheck```, а также стилевым линтером 
+* Твой исходный код будет тестироваться статическим анализатором ```cppcheck```, а также стилевым линтером 
 ```clang-format```.
 
 * Инструкция о том, как запустить эти тесты у себя на компьютере, лежит в папке `materials`.
 
-* Не используйте громоздкие функции, ограничивайтесь 40 строками (`main` не в счет).
+* Не используй громоздкие функции, ограничивайтесь 40 строками (`main` не в счет).
 
-* Проверяйте вашу программу на утечки памяти!
+* Проверяй свою программу на утечки памяти!
 
-> При разработке игры в полной мере руководствоваться принципами структурного программирования Э. Дейкстры. 
+> При разработке игры в полной мере руководствуйся принципами структурного программирования Э. Дейкстры. 
 
 ***LOADING...***
 
@@ -76,7 +76,7 @@ LOADING Hall…***
 >
 >In late 1940, John von Neumann defined life as a creation (as a being or organism) which can reproduce itself and simulate a Turing machine. Von Neumann was thinking about an engineering solution which would use electromagnetic components floating randomly in liquid or gas. This turned out not to be realistic with the technology available at the time. Stanislaw Ulam invented cellular automata, which were intended to simulate von Neumann's theoretical electromagnetic constructions. Ulam discussed using computers to simulate his cellular automata in a two-dimensional lattice in several papers. In parallel, von Neumann attempted to construct Ulam's cellular automaton. Although successful, he was busy with other projects and left some details unfinished. His construction was complicated because it tried to simulate his own engineering design. Over time, simpler life constructions were provided by other researchers, and published in papers and books.
 >
->Motivated by questions in mathematical logic and in part by work on simulation games by Ulam, among others, John Conway began doing experiments in 1968 with a variety of different two-dimensional cellular automaton rules.Conway's initial goal was to define an interesting and unpredictable cell automaton. For example, he wanted some configurations to last for a long time before dying and other configurations to go on forever without allowing cycles. It was a significant challenge and an open problem for years before experts on cellular automata managed to prove that, indeed, the Game of Life admitted of a configuration which was alive in the sense of satisfying Von Neumann's two general requirements. While the definitions before the Game of Life were proof-oriented, Conway's construction aimed at simplicity without a priori providing proof the automaton was alive.
+>Motivated by questions in mathematical logic and in part by work on simulation games by Ulam, among others, John Conway began doing experiments in 1968 with a variety of different two-dimensional cellular automaton rules. Conway's initial goal was to define an interesting and unpredictable cell automaton. For example, he wanted some configurations to last for a long time before dying and other configurations to go on forever without allowing cycles. It was a significant challenge and an open problem for years before experts on cellular automata managed to prove that, indeed, the Game of Life admitted of a configuration which was alive in the sense of satisfying Von Neumann's two general requirements. While the definitions before the Game of Life were proof-oriented, Conway's construction aimed at simplicity without a priori providing proof the automaton was alive.
 >
 >Conway chose his rules carefully, after considerable experimentation, to meet these criteria:
 >
