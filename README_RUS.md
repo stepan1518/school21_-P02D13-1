@@ -1,5 +1,8 @@
 # P02D13
 
+
+Полезные видеоматериалы ты можешь найти в разделе "Projects (Media)" на Платформе.
+
 ![dayp02](misc/rus/images/dayp02.png)
 
 ## Contents

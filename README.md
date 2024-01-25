@@ -1,5 +1,8 @@
 # P02D13
+
 The russian version of the task can be found in the repository.
+
+You can find some useful video materials in the "Projects (Media)" section on the Platform.
 
 ![dayp02](misc/eng/images/dayp02.png)
 
