@@ -48,7 +48,7 @@ Provide for original initialization of the "game" state via stdin. Prepare at le
   
 * Instructions on how to run these tests on your computer are in the `materials` folder. 
   
-* Do not use cumbersome functions, limit them up to 40 lines (excluding `main`).
+* Do not use cumbersome functions, limit them up to 40-50 lines.
 
 * Check your program for memory leaks!
 
