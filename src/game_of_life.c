@@ -8,24 +8,37 @@
 
 void init_grid_from_file(int grid[][WIDTH]);
 void render_canvas(int grid[][WIDTH]);
-void move_grid(int grid[][WIDTH]);
-int neighbours_count(int grid[][WIDTH], int x, int y);
+int move_grid(int grid[][WIDTH]);
+int neighbours_count(int grid[][WIDTH], int i_el, int j_el);
+void change_speed(int* speed, char action);
 
 int main() {
     initscr();
-    cbreak();
-    noecho();
     nodelay(stdscr, TRUE);
-
+    noecho();
+    
+    int speed = 300001;
     int grid[HEIGHT][WIDTH];
+
     init_grid_from_file(grid);
 
     while (1) {
         render_canvas(grid);
-        move_grid(grid);
-        usleep(200000);
+        char action = getch();
+        if (action != ERR) {
+            change_speed(&speed, action);
+        } 
+        if (action == 'q') {
+            break;
+        }
+        int flag = move_grid(grid);
+        if (flag == 0) {
+            break;
+        }
+        usleep(speed);
     }
 
+    endwin();
     return 0;
 }
 
@@ -38,6 +51,7 @@ void init_grid_from_file(int grid[][WIDTH]) {
             grid[i][j] = num;
         }
     }
+    freopen("/dev/tty", "rw", stdin);
 }
 
 void render_canvas(int grid[][WIDTH]) {
@@ -45,7 +59,7 @@ void render_canvas(int grid[][WIDTH]) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             if (grid[i][j])
-                printw("%c", 'o');
+                printw("%c", 'O');
             else
                 printw("%c", '-');
         }
@@ -54,7 +68,7 @@ void render_canvas(int grid[][WIDTH]) {
     refresh();
 }
 
-void move_grid(int grid[][WIDTH]) {
+int move_grid(int grid[][WIDTH]) {
     int grid_copy[HEIGHT][WIDTH];
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
@@ -67,12 +81,25 @@ void move_grid(int grid[][WIDTH]) {
                 grid_copy[i][j] = 0;
         }
     }
-
+    int count = 0;
+    int flag = 0;
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
+            if (grid_copy[i][j] == 1) count++;
+            if (grid[i][j] != grid_copy[i][j]) {
+                flag = 1;
+            }
+        }
+    }
+    if (count == 0) {
+        flag = 0;
+    }
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             grid[i][j] = grid_copy[i][j];
         }
-    } 
+    }
+    return flag;
 }
 
 int neighbours_count(int grid[][WIDTH], int i_el, int j_el) {
@@ -98,4 +125,12 @@ int neighbours_count(int grid[][WIDTH], int i_el, int j_el) {
     count += grid[pos_i][j_el];
 
     return count;
+}
+
+void change_speed(int* speed, char action) {
+    if (action == 'z' && *speed < 600000) {
+        *speed = *speed * 1.5;
+    } else if (action == 'x' && *speed > 120000) {
+        *speed = *speed * 0.75;
+    }
 }
