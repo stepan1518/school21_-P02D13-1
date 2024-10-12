@@ -1,7 +1,7 @@
+#include <ncurses.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <ncurses.h>
 
 #define HEIGHT 25
 #define WIDTH 80
@@ -10,13 +10,13 @@ void init_grid_from_file(int grid[][WIDTH]);
 void render_canvas(int grid[][WIDTH]);
 int move_grid(int grid[][WIDTH]);
 int neighbours_count(int grid[][WIDTH], int i_el, int j_el);
-void change_speed(int* speed, char action);
+void change_speed(int *speed, char action);
 
 int main() {
     initscr();
     nodelay(stdscr, TRUE);
     noecho();
-    
+
     int speed = 300001;
     int grid[HEIGHT][WIDTH];
 
@@ -27,7 +27,7 @@ int main() {
         char action = getch();
         if (action != ERR) {
             change_speed(&speed, action);
-        } 
+        }
         if (action == 'q') {
             break;
         }
@@ -42,7 +42,6 @@ int main() {
     return 0;
 }
 
-
 void init_grid_from_file(int grid[][WIDTH]) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
@@ -51,11 +50,13 @@ void init_grid_from_file(int grid[][WIDTH]) {
             grid[i][j] = num;
         }
     }
-    freopen("/dev/tty", "rw", stdin);
+    if (!freopen("/dev/tty", "rw", stdin)) {
+        exit(1);
+    };
 }
 
 void render_canvas(int grid[][WIDTH]) {
-    clear();    
+    clear();
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             if (grid[i][j])
@@ -106,13 +107,11 @@ int neighbours_count(int grid[][WIDTH], int i_el, int j_el) {
     int count = 0;
     int pos_j1 = j_el - 1, pos_j2 = (j_el + 1) % WIDTH;
 
-    if (pos_j1 < 0)
-        pos_j1 = WIDTH + pos_j1;
+    if (pos_j1 < 0) pos_j1 = WIDTH + pos_j1;
 
     for (int i = i_el - 1; i <= i_el + 1; i++) {
         int pos_i = i % HEIGHT;
-        if (pos_i < 0)
-            pos_i = HEIGHT + pos_i;
+        if (pos_i < 0) pos_i = HEIGHT + pos_i;
 
         count += grid[pos_i][pos_j1] + grid[pos_i][pos_j2];
     }
@@ -120,14 +119,13 @@ int neighbours_count(int grid[][WIDTH], int i_el, int j_el) {
     count += grid[(i_el + 1) % HEIGHT][j_el];
 
     int pos_i = i_el - 1;
-    if (pos_i < 0)
-        pos_i = HEIGHT + pos_i;
+    if (pos_i < 0) pos_i = HEIGHT + pos_i;
     count += grid[pos_i][j_el];
 
     return count;
 }
 
-void change_speed(int* speed, char action) {
+void change_speed(int *speed, char action) {
     if (action == 'z' && *speed < 600000) {
         *speed = *speed * 1.5;
     } else if (action == 'x' && *speed > 120000) {
