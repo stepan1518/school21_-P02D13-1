@@ -7,7 +7,7 @@
 
 int **init_matrix(int n, int m);
 void init_grid_from_file(int **grid);
-void output_matrix(int **matrix, int n, int m);
+void output_matrix(int **matrix);
 
 int main() {
     int error = 0;
@@ -17,12 +17,12 @@ int main() {
         init_grid_from_file(grid);
 
         if (error != 1) {
-            output_matrix(grid, HEIGHT, WIDTH);
+            output_matrix(grid);
         }
 
         free(grid);
     } 
-
+    printf("     %d", HEIGHT*WIDTH);
     return 0;
 }
 
@@ -35,14 +35,14 @@ int **init_matrix(int n, int m) {
     return matrix;
 }
 
-void output_matrix(int **matrix, int n, int m) {
-    int amount;
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < m; j++) {
+void output_matrix(int **matrix) {
+    int amount = 0;
+    for (int i = 0; i < HEIGHT; i++) {
+        for (int j = 0; j < WIDTH; j++) {
             printf("%d", matrix[i][j]);
             amount++;
 
-            if (j != m - 1) printf(" ");
+            if (j != WIDTH) printf(" ");
         }
 
         printf("\n");
@@ -58,7 +58,8 @@ void init_grid_from_file(int **grid) {
             char ch;
             scanf("%c", &ch);
             if (ch == EOF) break; // replace break with smth else
-            grid[i][j] = (ch == '1') ? 1 : 0;
+            if ((int)ch != 10) grid[i][j] = (ch == '1') ? 1 : 0;
+            // printf("%d ", ch);
         }
     }
 }
