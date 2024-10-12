@@ -28,11 +28,8 @@ int main() {
         if (action != ERR) {
             change_speed(&speed, action);
         }
-        if (action == 'q') {
-            break;
-        }
         int flag = move_grid(grid);
-        if (flag == 0) {
+        if (flag == 0 || action == 'q') {
             break;
         }
         usleep(speed);
