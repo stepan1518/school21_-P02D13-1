@@ -1,10 +1,10 @@
 #include <ncurses.h>
-#include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
 
 #define HEIGHT 25
 #define WIDTH 80
+#define SPEED 300001
 
 void init_grid_from_file(int grid[][WIDTH]);
 void render_canvas(int grid[][WIDTH]);
@@ -17,21 +17,24 @@ int main() {
     nodelay(stdscr, TRUE);
     noecho();
 
-    int speed = 300001;
+    int speed = SPEED;
     int grid[HEIGHT][WIDTH];
 
     init_grid_from_file(grid);
 
     while (1) {
         render_canvas(grid);
+
         char action = getch();
         if (action != ERR) {
             change_speed(&speed, action);
         }
+
         int flag = move_grid(grid);
         if (flag == 0 || action == 'q') {
             break;
         }
+
         usleep(speed);
     }
 
@@ -43,17 +46,19 @@ void init_grid_from_file(int grid[][WIDTH]) {
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             int num;
-            scanf("%d", &num);
+            scanw("%d", &num);
             grid[i][j] = num;
         }
     }
+
     if (!freopen("/dev/tty", "rw", stdin)) {
         exit(1);
-    };
+    }
 }
 
 void render_canvas(int grid[][WIDTH]) {
     clear();
+
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             if (grid[i][j])
@@ -61,16 +66,20 @@ void render_canvas(int grid[][WIDTH]) {
             else
                 printw("%c", '-');
         }
+
         printw("\n");
     }
+
     refresh();
 }
 
 int move_grid(int grid[][WIDTH]) {
     int grid_copy[HEIGHT][WIDTH];
+
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             int count = neighbours_count(grid, i, j);
+            
             if (count == 3) {
                 grid_copy[i][j] = 1;
             } else if (count == 2)
@@ -79,24 +88,24 @@ int move_grid(int grid[][WIDTH]) {
                 grid_copy[i][j] = 0;
         }
     }
-    int count = 0;
-    int flag = 0;
+
+    int count = 0, flag = 0;
+
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             if (grid_copy[i][j] == 1) count++;
-            if (grid[i][j] != grid_copy[i][j]) {
-                flag = 1;
-            }
+            if (grid[i][j] != grid_copy[i][j]) flag = 1;
         }
     }
-    if (count == 0) {
-        flag = 0;
-    }
+
+    if (count == 0) flag = 0;
+
     for (int i = 0; i < HEIGHT; i++) {
         for (int j = 0; j < WIDTH; j++) {
             grid[i][j] = grid_copy[i][j];
         }
     }
+
     return flag;
 }
 
