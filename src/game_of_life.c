@@ -29,23 +29,23 @@ int main() {
 
     error = init_grid_from_file(grid);
     if (error == 1) {
-        printf("an error occured while opening a terminal\n");
-        return 1;
-    }
+        printw("An error occured while opening a terminal.\n");
+        refresh();
+    } else {
+        char action;
+        while (1) {
+            print_start_interface();
+            action = getch();
+            if (action == 'Q' || action == 'q' || action == 'S' || action == 's') break;
+        }
 
-    char action;
-    while (1) {
-        print_start_interface();
-        action = getch();
-        if (action == 'Q' || action == 'q' || action == 'S' || action == 's') break;
-    }
-
-    if (action == 'S' || action == 's') {
-        int end;
-        end = game(grid, &speed);
-        nodelay(stdscr, FALSE);
-        print_end_interface(end);
-        getch();
+        if (action == 'S' || action == 's') {
+            int end;
+            end = game(grid, &speed);
+            nodelay(stdscr, FALSE);
+            print_end_interface(end);
+            getch();
+        }
     }
 
     endwin();
